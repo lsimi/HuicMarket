@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"  
+	xmlns:jee="http://www.springframework.org/schema/jee" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
+	
+
+		<util:properties id="pros" location="classpath:db.properties"></util:properties>
+		
+		<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+		<property name="driverClassName" value="#{pros.driver}"></property>
+		<property name="url" value="#{pros.url}"></property>
+		<property name="username" value="#{pros.username}"></property>
+		<property name="password" value="#{pros.pwd}"></property>
+		<property name="initialSize" value="#{pros.initialSize}"></property>
+		<property name="minIdle" value="#{pros.minIdle}"></property>
+		<property name="maxActive" value="#{pros.maxActive}"></property>
+		<property name="maxWait" value="#{pros.maxWait}"></property>
+		<property name="timeBetweenEvictionRunsMillis" value="#{pros.timeBetweenEvictionRunsMillis}"></property>
+		<property name="minEvictableIdleTimeMillis" value="#{pros.minEvictableIdleTimeMillis}"></property>
+		</bean>
+
+		<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="typeAliasesPackage" value="
+			com.huic.goods.entity,
+			com.huic.user.entity,
+			com.huic.backgoods.entity,
+			com.huic.backstore.entity,
+			com.huic.collect.entity,
+			com.huic.backcategory.entity,
+			com.huic.backgoodsdetail.entity,
+			com.huic.backtaste.entity,
+			com.huic.backpack.entity,
+			com.huic.collect.entity,
+			com.huic.saleCar.entity,
+			com.huic.store.entity,
+			com.huic.order.entity,
+			com.huic.addrinfo.entity,
+			com.huic.express.entity
+		"></property>
+		<property name="mapperLocations">
+			<array>
+				<value>classpath:com/huic/goods/dao/*.xml</value>
+				<value>classpath:com/huic/user/dao/*.xml</value>
+				<value>classpath:com/huic/backgoods/dao/*.xml</value>
+				<value>classpath:com/huic/backgoodsdetail/dao/*.xml</value>
+				<value>classpath:com/huic/backstore/dao/*.xml</value>
+				<value>classpath:com/huic/backcategory/dao/*.xml</value>
+				<value>classpath:com/huic/backtaste/dao/*.xml</value>
+				<value>classpath:com/huic/backpack/dao/*.xml</value>
+				
+				<value>classpath:com/huic/express/dao/*.xml</value>
+				<value>classpath:com/huic/store/dao/*.xml</value>
+				<value>classpath:com/huic/saleCar/dao/*.xml</value>
+				<value>classpath:com/huic/collect/dao/*.xml</value>
+				<value>classpath:com/huic/order/dao/*.xml</value>
+				<value>classpath:com/huic/addrinfo/dao/*.xml</value>
+			</array>			
+		</property>
+		
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageInterceptor">
+					<property name="properties">
+						<value>helperDialect=mysql</value>
+					</property>
+				</bean>
+			</array>
+		</property>
+		</bean>
+		
+		<bean id="scannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" 
+		value="
+			com.huic.goods.dao,
+			com.huic.user.dao,
+			com.huic.backgoods.dao,
+			com.huic.backgoodsdetail.dao,
+			com.huic.backstore.dao,
+			com.huic.backcategory.dao,
+			com.huic.backpack.dao,
+			com.huic.backtaste.dao,
+			com.huic.collect.dao,
+			com.huic.saleCar.dao,
+			com.huic.store.dao,
+			com.huic.order.dao,
+			com.huic.addrinfo.dao,
+			com.huic.express.dao
+		"></property>
+		<property name="annotationClass" value="com.huic.annotation.Myannotation"></property>
+		</bean>
+		
+		
+</beans>

@@ -1,0 +1,79 @@
+
+.mycheck input[type=checkbox] {
+	width: 0;
+	height: 0;
+	/*display: none;*/
+}
+.mycheck label {
+	cursor: pointer;
+	position: relative;
+	width: 20px;
+	height: 20px;
+	background: #fff;
+	border:2px solid #73B6E1;
+	-moz-border-radius: 3px;      /* Gecko browsers */
+	-webkit-border-radius: 3px;   /* Webkit browsers */
+	border-radius:3px;            /* W3C syntax */
+}
+.mycheck label:after {
+	opacity: 0;
+	content: '';
+	position: absolute;
+    width: 8px;
+    height: 5px;
+    background: transparent;
+    top: 5px;
+    left: 4px;
+	border: 2px solid #73B6E1;
+	border-top: none;
+	border-right: none;
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+.mycheck label:hover::after {
+ opacity: 0.5;
+}
+.mycheck input[type=checkbox]:checked + label:after {
+	opacity: 1;
+}
+
+@keyframes dothatopcheck{
+  0% { height: 0; }
+  50% { height: 0; }
+  100% { height: $checkbox-height * 0.7; }
+}
+@-webkit-keyframes dothatopcheck{
+  0% { height: 0; }
+  50% { height: 0; }
+  100% { height: $checkbox-height * 0.7; }
+}
+@-moz-keyframes dothatopcheck{
+  0% { height: 0; }
+  50% { height: 0; }
+  100% { height: $checkbox-height * 0.7; }
+}
+
+ul.unit li {
+    width: 18%;
+    text-align: right;
+}
+ul.cart-header li, ul.cart-header1 li, ul.cart-header2 li {
+    width: 18%;
+    text-align: center;
+}
+
+ul.cart-header li span,ul.cart-header1 li span,ul.cart-header2 li span{
+	text-align: center;
+	vertical-align:middle;
+}
+ul.cart-header .mycheck{
+	width: 25px;
+	margin-right: 50px;
+	position: relative;
+}
+ul.unit .mycheck {
+	width: 18%;
+}

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huic.backgoods.dao.BackgoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.huic.backgoods.entity.Backgoods" >
+    <id column="g_id" property="gId" jdbcType="INTEGER" />
+    <result column="g_name" property="gName" jdbcType="VARCHAR" />
+    <result column="cate_id" property="cateId" jdbcType="INTEGER" />
+    <result column="g_img" property="gImg" jdbcType="VARCHAR" />
+    <result column="g_salenum" property="gSalenum" jdbcType="BIGINT" />
+    <result column="g_uptime" property="gUptime" jdbcType="TIMESTAMP" />
+    <result column="g_status" property="gStatus" jdbcType="INTEGER" />
+    <result column="g_downtime" property="gDowntime" jdbcType="TIMESTAMP" />
+    <result column="s_id" property="sId" jdbcType="INTEGER" />
+    <result column="g_detail" property="gDetail" jdbcType="VARCHAR" />
+    <result column="g_great" property="gGreat" jdbcType="INTEGER" />
+    <result column="g_delete" property="gDelete" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    g_id, g_name, cate_id, g_img, g_salenum, g_uptime, g_status, g_downtime, s_id, g_detail, 
+    g_great, g_delete
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where g_id = #{gId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goods
+    where g_id = #{gId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.huic.backgoods.entity.Backgoods" >
+    insert into goods (g_id, g_name, cate_id, 
+      g_img, g_salenum, g_uptime, 
+      g_status, g_downtime, s_id, 
+      g_detail, g_great, g_delete
+      )
+    values (#{gId,jdbcType=INTEGER}, #{gName,jdbcType=VARCHAR}, #{cateId,jdbcType=INTEGER}, 
+      #{gImg,jdbcType=VARCHAR}, #{gSalenum,jdbcType=BIGINT}, #{gUptime,jdbcType=TIMESTAMP}, 
+      #{gStatus,jdbcType=INTEGER}, #{gDowntime,jdbcType=TIMESTAMP}, #{sId,jdbcType=INTEGER}, 
+      #{gDetail,jdbcType=VARCHAR}, #{gGreat,jdbcType=INTEGER}, #{gDelete,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.huic.backgoods.entity.Backgoods" >
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="gId != null" >
+        g_id,
+      </if>
+      <if test="gName != null" >
+        g_name,
+      </if>
+      <if test="cateId != null" >
+        cate_id,
+      </if>
+      <if test="gImg != null" >
+        g_img,
+      </if>
+      <if test="gSalenum != null" >
+        g_salenum,
+      </if>
+      <if test="gUptime != null" >
+        g_uptime,
+      </if>
+      <if test="gStatus != null" >
+        g_status,
+      </if>
+      <if test="gDowntime != null" >
+        g_downtime,
+      </if>
+      <if test="sId != null" >
+        s_id,
+      </if>
+      <if test="gDetail != null" >
+        g_detail,
+      </if>
+      <if test="gGreat != null" >
+        g_great,
+      </if>
+      <if test="gDelete != null" >
+        g_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="gId != null" >
+        #{gId,jdbcType=INTEGER},
+      </if>
+      <if test="gName != null" >
+        #{gName,jdbcType=VARCHAR},
+      </if>
+      <if test="cateId != null" >
+        #{cateId,jdbcType=INTEGER},
+      </if>
+      <if test="gImg != null" >
+        #{gImg,jdbcType=VARCHAR},
+      </if>
+      <if test="gSalenum != null" >
+        #{gSalenum,jdbcType=BIGINT},
+      </if>
+      <if test="gUptime != null" >
+        #{gUptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gStatus != null" >
+        #{gStatus,jdbcType=INTEGER},
+      </if>
+      <if test="gDowntime != null" >
+        #{gDowntime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sId != null" >
+        #{sId,jdbcType=INTEGER},
+      </if>
+      <if test="gDetail != null" >
+        #{gDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="gGreat != null" >
+        #{gGreat,jdbcType=INTEGER},
+      </if>
+      <if test="gDelete != null" >
+        #{gDelete,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huic.backgoods.entity.Backgoods" >
+    update goods
+    <set >
+      <if test="gName != null" >
+        g_name = #{gName,jdbcType=VARCHAR},
+      </if>
+      <if test="cateId != null" >
+        cate_id = #{cateId,jdbcType=INTEGER},
+      </if>
+      <if test="gImg != null" >
+        g_img = #{gImg,jdbcType=VARCHAR},
+      </if>
+      <if test="gSalenum != null" >
+        g_salenum = #{gSalenum,jdbcType=BIGINT},
+      </if>
+      <if test="gUptime != null" >
+        g_uptime = #{gUptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gStatus != null" >
+        g_status = #{gStatus,jdbcType=INTEGER},
+      </if>
+      <if test="gDowntime != null" >
+        g_downtime = #{gDowntime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sId != null" >
+        s_id = #{sId,jdbcType=INTEGER},
+      </if>
+      <if test="gDetail != null" >
+        g_detail = #{gDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="gGreat != null" >
+        g_great = #{gGreat,jdbcType=INTEGER},
+      </if>
+      <if test="gDelete != null" >
+        g_delete = #{gDelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    where g_id = #{gId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huic.backgoods.entity.Backgoods" >
+    update goods
+    set g_name = #{gName,jdbcType=VARCHAR},
+      cate_id = #{cateId,jdbcType=INTEGER},
+      g_img = #{gImg,jdbcType=VARCHAR},
+      g_salenum = #{gSalenum,jdbcType=BIGINT},
+      g_uptime = #{gUptime,jdbcType=TIMESTAMP},
+      g_status = #{gStatus,jdbcType=INTEGER},
+      g_downtime = #{gDowntime,jdbcType=TIMESTAMP},
+      s_id = #{sId,jdbcType=INTEGER},
+      g_detail = #{gDetail,jdbcType=VARCHAR},
+      g_great = #{gGreat,jdbcType=INTEGER},
+      g_delete = #{gDelete,jdbcType=INTEGER}
+    where g_id = #{gId,jdbcType=INTEGER}
+  </update>
+  
+  
+  <select id="selectAll" resultMap="goodsResultMap" parameterType="backgoodspage">
+  select
+   g_id, g_name,g.cate_id , g_img, g_salenum, g_uptime, g_status, g_downtime, s_id, g_detail ,g_great,g_delete
+  ,cate_name,cparent_id
+  from goods g, category c
+  where 
+  g.cate_id=c.cate_id
+  and
+  g.g_delete=1
+  and
+  s_id=#{sid}
+  <if test="goodsname != null">
+  and 
+  g.g_name like "%" #{goodsname} "%"
+  </if>
+  <if test="cparentid !=null">
+  and 
+  g.cate_id in
+  (
+  	select cate_id from category
+	where cparent_id=#{cparentid}
+  )
+  </if>
+
+  </select>
+  
+  <resultMap type="backgoods" id="goodsResultMap" extends="BaseResultMap">
+  <association property="backcategory" column="cate_id" javaType="int" resultMap="com.huic.backcategory.dao.BackcategoryMapper.BaseResultMap"></association>
+  </resultMap>
+  
+  
+  <update id="updateGreat" parameterType="backgoods" > 
+   update goods set
+   g_great = #{gGreat}
+   where 
+   g_id = #{gId}
+  </update>
+  
+  <update id="updateStatus" parameterType="backgoods" > 
+   update goods set
+   g_status = #{gStatus}
+   where 
+   g_id = #{gId}
+  </update>
+    
+  <update id="deletegoods" parameterType="backgoods" > 
+   update goods set
+   g_delete = #{gDelete}
+   where 
+   g_id = #{gId}
+  </update>
+
+  
+  
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huic.backstore.dao.BackstoreMapper" >
+  <resultMap id="BaseResultMap" type="com.huic.backstore.entity.Backstore" >
+    <id column="s_id" property="sId" jdbcType="INTEGER" />
+    <result column="s_name" property="sName" jdbcType="VARCHAR" />
+    <result column="s_logo" property="sLogo" jdbcType="VARCHAR" />
+    <result column="ro_id" property="roId" jdbcType="INTEGER" />
+    <result column="s_status" property="sStatus" jdbcType="VARCHAR" />
+    <result column="s_adminname" property="sAdminname" jdbcType="VARCHAR" />
+    <result column="s_password" property="sPassword" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    s_id, s_name, s_logo, ro_id, s_status, s_adminname, s_password
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from store
+    where s_id = #{sId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from store
+    where s_id = #{sId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.huic.backstore.entity.Backstore" >
+    insert into store (s_id, s_name, s_logo, 
+      ro_id, s_status, s_adminname, 
+      s_password)
+    values (#{sId,jdbcType=INTEGER}, #{sName,jdbcType=VARCHAR}, #{sLogo,jdbcType=VARCHAR}, 
+      #{roId,jdbcType=INTEGER}, #{sStatus,jdbcType=VARCHAR}, #{sAdminname,jdbcType=VARCHAR}, 
+      #{sPassword,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huic.backstore.entity.Backstore" >
+    insert into store
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sId != null" >
+        s_id,
+      </if>
+      <if test="sName != null" >
+        s_name,
+      </if>
+      <if test="sLogo != null" >
+        s_logo,
+      </if>
+      <if test="roId != null" >
+        ro_id,
+      </if>
+      <if test="sStatus != null" >
+        s_status,
+      </if>
+      <if test="sAdminname != null" >
+        s_adminname,
+      </if>
+      <if test="sPassword != null" >
+        s_password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sId != null" >
+        #{sId,jdbcType=INTEGER},
+      </if>
+      <if test="sName != null" >
+        #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="sLogo != null" >
+        #{sLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="roId != null" >
+        #{roId,jdbcType=INTEGER},
+      </if>
+      <if test="sStatus != null" >
+        #{sStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sAdminname != null" >
+        #{sAdminname,jdbcType=VARCHAR},
+      </if>
+      <if test="sPassword != null" >
+        #{sPassword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huic.backstore.entity.Backstore" >
+    update store
+    <set >
+      <if test="sName != null" >
+        s_name = #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="sLogo != null" >
+        s_logo = #{sLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="roId != null" >
+        ro_id = #{roId,jdbcType=INTEGER},
+      </if>
+      <if test="sStatus != null" >
+        s_status = #{sStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sAdminname != null" >
+        s_adminname = #{sAdminname,jdbcType=VARCHAR},
+      </if>
+      <if test="sPassword != null" >
+        s_password = #{sPassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where s_id = #{sId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huic.backstore.entity.Backstore" >
+    update store
+    set s_name = #{sName,jdbcType=VARCHAR},
+      s_logo = #{sLogo,jdbcType=VARCHAR},
+      ro_id = #{roId,jdbcType=INTEGER},
+      s_status = #{sStatus,jdbcType=VARCHAR},
+      s_adminname = #{sAdminname,jdbcType=VARCHAR},
+      s_password = #{sPassword,jdbcType=VARCHAR}
+    where s_id = #{sId,jdbcType=INTEGER}
+  </update>
+</mapper>

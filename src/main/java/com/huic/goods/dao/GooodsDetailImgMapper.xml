@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huic.goods.dao.GooodsDetailImgMapper" >
+  <resultMap id="BaseResultMap" type="com.huic.goods.entity.GooodsDetailImg" >
+    <id column="imgid" property="imgid" jdbcType="INTEGER" />
+    <result column="g_id" property="gId" jdbcType="INTEGER" />
+    <result column="imgurl" property="imgurl" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    imgid, g_id, imgurl, type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from detailimg
+    where imgid = #{imgid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from detailimg
+    where imgid = #{imgid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.huic.goods.entity.GooodsDetailImg" >
+    insert into detailimg (imgid, g_id, imgurl, 
+      type)
+    values (#{imgid,jdbcType=INTEGER}, #{gId,jdbcType=INTEGER}, #{imgurl,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huic.goods.entity.GooodsDetailImg" >
+    insert into detailimg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="imgid != null" >
+        imgid,
+      </if>
+      <if test="gId != null" >
+        g_id,
+      </if>
+      <if test="imgurl != null" >
+        imgurl,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="imgid != null" >
+        #{imgid,jdbcType=INTEGER},
+      </if>
+      <if test="gId != null" >
+        #{gId,jdbcType=INTEGER},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huic.goods.entity.GooodsDetailImg" >
+    update detailimg
+    <set >
+      <if test="gId != null" >
+        g_id = #{gId,jdbcType=INTEGER},
+      </if>
+      <if test="imgurl != null" >
+        imgurl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where imgid = #{imgid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huic.goods.entity.GooodsDetailImg" >
+    update detailimg
+    set g_id = #{gId,jdbcType=INTEGER},
+      imgurl = #{imgurl,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR}
+    where imgid = #{imgid,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByGid" parameterType="int" resultMap="BaseResultMap">
+  		select <include refid="Base_Column_List"></include>
+  		from detailimg
+  		where g_id=#{gId}
+  		and imgstatus=1
+  		order by imgrank
+  </select>
+</mapper>

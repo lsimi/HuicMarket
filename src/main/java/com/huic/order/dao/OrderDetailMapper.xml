@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huic.order.dao.OrderDetailMapper">
+  <resultMap id="BaseResultMap" type="com.huic.order.entity.OrderDetail">
+    <id column="ode_id" jdbcType="INTEGER" property="odeId" />
+    <result column="or_id" jdbcType="INTEGER" property="orId" />
+    <result column="g_num" jdbcType="BIGINT" property="gNum" />
+    <result column="totalprice" jdbcType="DOUBLE" property="totalprice" />
+    <result column="gd_id" jdbcType="INTEGER" property="gdId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ode_id, or_id, g_num, totalprice, gd_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from orderdetail
+    where ode_id = #{odeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from orderdetail
+    where ode_id = #{odeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.huic.order.entity.OrderDetail">
+    insert into orderdetail (ode_id, or_id, g_num, 
+      totalprice, gd_id)
+    values (#{odeId,jdbcType=INTEGER}, #{orId,jdbcType=INTEGER}, #{gNum,jdbcType=BIGINT}, 
+      #{totalprice,jdbcType=DECIMAL}, #{gdId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huic.order.entity.OrderDetail">
+    insert into orderdetail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="odeId != null">
+        ode_id,
+      </if>
+      <if test="orId != null">
+        or_id,
+      </if>
+      <if test="gNum != null">
+        g_num,
+      </if>
+      <if test="totalprice != null">
+        totalprice,
+      </if>
+      <if test="gdId != null">
+        gd_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="odeId != null">
+        #{odeId,jdbcType=INTEGER},
+      </if>
+      <if test="orId != null">
+        #{orId,jdbcType=INTEGER},
+      </if>
+      <if test="gNum != null">
+        #{gNum,jdbcType=BIGINT},
+      </if>
+      <if test="totalprice != null">
+        #{totalprice,jdbcType=DECIMAL},
+      </if>
+      <if test="gdId != null">
+        #{gdId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huic.order.entity.OrderDetail">
+    update orderdetail
+    <set>
+      <if test="orId != null">
+        or_id = #{orId,jdbcType=INTEGER},
+      </if>
+      <if test="gNum != null">
+        g_num = #{gNum,jdbcType=BIGINT},
+      </if>
+      <if test="totalprice != null">
+        totalprice = #{totalprice,jdbcType=DECIMAL},
+      </if>
+      <if test="gdId != null">
+        gd_id = #{gdId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ode_id = #{odeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huic.order.entity.OrderDetail">
+    update orderdetail
+    set or_id = #{orId,jdbcType=INTEGER},
+      g_num = #{gNum,jdbcType=BIGINT},
+      totalprice = #{totalprice,jdbcType=DECIMAL},
+      gd_id = #{gdId,jdbcType=INTEGER}
+    where ode_id = #{odeId,jdbcType=INTEGER}
+  </update>
+</mapper>

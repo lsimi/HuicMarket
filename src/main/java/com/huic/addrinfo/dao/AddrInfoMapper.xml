@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huic.addrinfo.dao.AddrInfoMapper">
+  <resultMap id="BaseResultMap" type="com.huic.addrinfo.entity.AddrInfo">
+    <id column="addr_id" jdbcType="INTEGER" property="addrId" />
+    <result column="addr_name" jdbcType="VARCHAR" property="addrName" />
+    <result column="addr_detail" jdbcType="VARCHAR" property="addrDetail" />
+    <result column="addr_phone" jdbcType="VARCHAR" property="addrPhone" />
+    <result column="addr_post" jdbcType="VARCHAR" property="addrPost" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="addr_status" jdbcType="INTEGER" property="addrStatus" />
+    <result column="addr_provice" jdbcType="VARCHAR" property="addrProvice" />
+    <result column="addr_city" jdbcType="VARCHAR" property="addrCity" />
+    <result column="addr_area" jdbcType="VARCHAR" property="addrArea" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    addr_id, addr_name, addr_detail, addr_phone, addr_post, user_id, addr_status, addr_provice, 
+    addr_city, addr_area
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from addrinfo
+    where addr_id = #{addrId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from addrinfo
+    where addr_id = #{addrId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.huic.addrinfo.entity.AddrInfo">
+    insert into addrinfo (addr_id, addr_name, addr_detail, 
+      addr_phone, addr_post, user_id, 
+      addr_status, addr_provice, addr_city, 
+      addr_area)
+    values (#{addrId,jdbcType=INTEGER}, #{addrName,jdbcType=VARCHAR}, #{addrDetail,jdbcType=VARCHAR}, 
+      #{addrPhone,jdbcType=VARCHAR}, #{addrPost,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{addrStatus,jdbcType=INTEGER}, #{addrProvice,jdbcType=VARCHAR}, #{addrCity,jdbcType=VARCHAR}, 
+      #{addrArea,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huic.addrinfo.entity.AddrInfo">
+    insert into addrinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="addrId != null">
+        addr_id,
+      </if>
+      <if test="addrName != null">
+        addr_name,
+      </if>
+      <if test="addrDetail != null">
+        addr_detail,
+      </if>
+      <if test="addrPhone != null">
+        addr_phone,
+      </if>
+      <if test="addrPost != null">
+        addr_post,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="addrStatus != null">
+        addr_status,
+      </if>
+      <if test="addrProvice != null">
+        addr_provice,
+      </if>
+      <if test="addrCity != null">
+        addr_city,
+      </if>
+      <if test="addrArea != null">
+        addr_area,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="addrId != null">
+        #{addrId,jdbcType=INTEGER},
+      </if>
+      <if test="addrName != null">
+        #{addrName,jdbcType=VARCHAR},
+      </if>
+      <if test="addrDetail != null">
+        #{addrDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="addrPhone != null">
+        #{addrPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="addrPost != null">
+        #{addrPost,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="addrStatus != null">
+        #{addrStatus,jdbcType=INTEGER},
+      </if>
+      <if test="addrProvice != null">
+        #{addrProvice,jdbcType=VARCHAR},
+      </if>
+      <if test="addrCity != null">
+        #{addrCity,jdbcType=VARCHAR},
+      </if>
+      <if test="addrArea != null">
+        #{addrArea,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huic.addrinfo.entity.AddrInfo">
+    update addrinfo
+    <set>
+      <if test="addrName != null">
+        addr_name = #{addrName,jdbcType=VARCHAR},
+      </if>
+      <if test="addrDetail != null">
+        addr_detail = #{addrDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="addrPhone != null">
+        addr_phone = #{addrPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="addrPost != null">
+        addr_post = #{addrPost,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="addrStatus != null">
+        addr_status = #{addrStatus,jdbcType=INTEGER},
+      </if>
+      <if test="addrProvice != null">
+        addr_provice = #{addrProvice,jdbcType=VARCHAR},
+      </if>
+      <if test="addrCity != null">
+        addr_city = #{addrCity,jdbcType=VARCHAR},
+      </if>
+      <if test="addrArea != null">
+        addr_area = #{addrArea,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where addr_id = #{addrId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huic.addrinfo.entity.AddrInfo">
+    update addrinfo
+    set addr_name = #{addrName,jdbcType=VARCHAR},
+      addr_detail = #{addrDetail,jdbcType=VARCHAR},
+      addr_phone = #{addrPhone,jdbcType=VARCHAR},
+      addr_post = #{addrPost,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      addr_status = #{addrStatus,jdbcType=INTEGER},
+      addr_provice = #{addrProvice,jdbcType=VARCHAR},
+      addr_city = #{addrCity,jdbcType=VARCHAR},
+      addr_area = #{addrArea,jdbcType=VARCHAR}
+    where addr_id = #{addrId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectAddrByUserId" parameterType="int" resultMap="BaseResultMap">
+  		select <include refid="Base_Column_List" />
+  		from addrinfo 
+  		where user_id=#{userId}
+  		ORDER BY addr_status
+  </select>
+  <update id="updateStatusByOne">
+  		update addrinfo
+		set addr_status=1
+		WHERE addr_status=0
+  </update>
+  <update id="updateStatusByZero" parameterType="int">
+  		update addrinfo 
+		set addr_status=0
+		where addr_id=#{addrId};
+  </update>
+  <delete id="deleteAddrInfo" parameterType="map">
+  		delete from
+  		addrinfo
+  		where addr_id=#{addrId}
+  		and user_id=#{userId}
+  </delete>
+  <select id="selectAddrByDefaltstatus" parameterType="map"  resultType="int">
+  		select addr_id
+  		from addrinfo 
+  		where addr_status=#{addrStatus}
+  		and user_id=#{userId}
+  </select>
+</mapper>

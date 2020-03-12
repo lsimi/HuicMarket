@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huic.goods.dao.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.huic.goods.entity.Goods" >
+    <id column="g_id" property="gId" jdbcType="INTEGER" />
+    <result column="g_name" property="gName" jdbcType="VARCHAR" />
+    <result column="cate_id" property="cateId" jdbcType="INTEGER" />
+    <result column="g_img" property="gImg" jdbcType="VARCHAR" />
+    <result column="g_salenum" property="gSalenum" jdbcType="BIGINT" />
+    <result column="g_uptime" property="gUptime" jdbcType="TIMESTAMP" />
+    <result column="g_status" property="gStatus" jdbcType="INTEGER" />
+    <result column="g_downtime" property="gDowntime" jdbcType="TIMESTAMP" />
+    <result column="s_id" property="sId" jdbcType="INTEGER" />
+    <result column="g_detail" property="gDetail" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    g_id, g_name, cate_id, g_img, g_salenum, g_uptime, g_status, g_downtime, s_id, g_detail
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where g_id = #{gId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goods
+    where g_id = #{gId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.huic.goods.entity.Goods" >
+    insert into goods (g_id, g_name, cate_id, 
+      g_img, g_salenum, g_uptime, 
+      g_status, g_downtime, s_id, 
+      g_detail)
+    values (#{gId,jdbcType=INTEGER}, #{gName,jdbcType=VARCHAR}, #{cateId,jdbcType=INTEGER}, 
+      #{gImg,jdbcType=VARCHAR}, #{gSalenum,jdbcType=BIGINT}, #{gUptime,jdbcType=TIMESTAMP}, 
+      #{gStatus,jdbcType=INTEGER}, #{gDowntime,jdbcType=TIMESTAMP}, #{sId,jdbcType=INTEGER}, 
+      #{gDetail,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huic.goods.entity.Goods" >
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="gId != null" >
+        g_id,
+      </if>
+      <if test="gName != null" >
+        g_name,
+      </if>
+      <if test="cateId != null" >
+        cate_id,
+      </if>
+      <if test="gImg != null" >
+        g_img,
+      </if>
+      <if test="gSalenum != null" >
+        g_salenum,
+      </if>
+      <if test="gUptime != null" >
+        g_uptime,
+      </if>
+      <if test="gStatus != null" >
+        g_status,
+      </if>
+      <if test="gDowntime != null" >
+        g_downtime,
+      </if>
+      <if test="sId != null" >
+        s_id,
+      </if>
+      <if test="gDetail != null" >
+        g_detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="gId != null" >
+        #{gId,jdbcType=INTEGER},
+      </if>
+      <if test="gName != null" >
+        #{gName,jdbcType=VARCHAR},
+      </if>
+      <if test="cateId != null" >
+        #{cateId,jdbcType=INTEGER},
+      </if>
+      <if test="gImg != null" >
+        #{gImg,jdbcType=VARCHAR},
+      </if>
+      <if test="gSalenum != null" >
+        #{gSalenum,jdbcType=BIGINT},
+      </if>
+      <if test="gUptime != null" >
+        #{gUptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gStatus != null" >
+        #{gStatus,jdbcType=INTEGER},
+      </if>
+      <if test="gDowntime != null" >
+        #{gDowntime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sId != null" >
+        #{sId,jdbcType=INTEGER},
+      </if>
+      <if test="gDetail != null" >
+        #{gDetail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huic.goods.entity.Goods" >
+    update goods
+    <set >
+      <if test="gName != null" >
+        g_name = #{gName,jdbcType=VARCHAR},
+      </if>
+      <if test="cateId != null" >
+        cate_id = #{cateId,jdbcType=INTEGER},
+      </if>
+      <if test="gImg != null" >
+        g_img = #{gImg,jdbcType=VARCHAR},
+      </if>
+      <if test="gSalenum != null" >
+        g_salenum = #{gSalenum,jdbcType=BIGINT},
+      </if>
+      <if test="gUptime != null" >
+        g_uptime = #{gUptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gStatus != null" >
+        g_status = #{gStatus,jdbcType=INTEGER},
+      </if>
+      <if test="gDowntime != null" >
+        g_downtime = #{gDowntime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sId != null" >
+        s_id = #{sId,jdbcType=INTEGER},
+      </if>
+      <if test="gDetail != null" >
+        g_detail = #{gDetail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where g_id = #{gId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huic.goods.entity.Goods" >
+    update goods
+    set g_name = #{gName,jdbcType=VARCHAR},
+      cate_id = #{cateId,jdbcType=INTEGER},
+      g_img = #{gImg,jdbcType=VARCHAR},
+      g_salenum = #{gSalenum,jdbcType=BIGINT},
+      g_uptime = #{gUptime,jdbcType=TIMESTAMP},
+      g_status = #{gStatus,jdbcType=INTEGER},
+      g_downtime = #{gDowntime,jdbcType=TIMESTAMP},
+      s_id = #{sId,jdbcType=INTEGER},
+      g_detail = #{gDetail,jdbcType=VARCHAR}
+    where g_id = #{gId,jdbcType=INTEGER}
+  </update>
+  <resultMap type="Goods" id="resultGoodsAndStose" extends="BaseResultMap">
+		<association property="store" column="s_id" javaType="Store"
+		select="com.huic.store.dao.StoreMapper.selectBySId"></association>  
+  </resultMap>
+  <select id="selectgoods" parameterType="int" resultMap="resultGoodsAndStose">
+  		select <include refid="Base_Column_List"></include>
+  		from goods
+  		where g_id=#{gId}
+  </select>
+  <resultMap type="Goods" id="goodsAndGoodsdetail" extends="BaseResultMap">
+  		<association property="store" column="g_id" javaType="Store"
+  		select="com.huic.store.dao.StoreMapper.selectBySId"></association>
+  		<collection property="imgs" column="g_id" ofType="GooodsDetailImg" 
+  		select="com.huic.goods.dao.GooodsDetailImgMapper.selectByGid"></collection>
+  		<collection property="goodsdetails" column="g_id" ofType="Goodsdetail"
+  		select="com.huic.goods.dao.GoodsdetailMapper.selectBygId"></collection>
+  </resultMap>
+  
+  <select id="selectGoodsByGoodsId" parameterType="int" resultMap="goodsAndGoodsdetail">
+  		SELECT <include refid="Base_Column_List"></include>
+  		FROM goods 
+		WHERE g_id IN(
+			SELECT g.g_id 
+			FROM goods g,goodsdetail gd,pack p,taste t
+			WHERE g.`g_id`=gd.`g_id`
+			AND gd.`pack_id`=p.`pack_id`
+			AND gd.`taste_id`=t.`taste_id`
+			AND g.`g_id`=#{gId}
+		)
+  </select>
+</mapper>
